@@ -4,7 +4,7 @@
     <div class="container">
         <div class="columns">
             <div class="column is-half-tablet">
-                <h1 class="is-size-1">Editar área</h1>
+                <h1 class="is-size-1">Editar categoría</h1>
                 <form method="POST" action="{{route("guardarCambiosDeArea")}}">
                     @method("put")
                     @csrf

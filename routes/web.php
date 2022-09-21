@@ -35,7 +35,90 @@ Route::group(
             ->group(function () {
               
              //PRUEBAS
+             // CATEGORIAS
+                Route::resource('categoria', "CategoriaController");
+                Route::post('categoria/store', "CategoriaController@store");
+                
+             //
                 Route::view("bienvenido/", "bienvenido")->name("bienvenido");
+                Route::get('cliente', "ClienteController@cliente")->name('cliente');
+                Route::post('cliente', "ClienteController@guardar");
+
+                //PROVEEDOR
+                Route::get('proveedor', "ProveedorController@proveedor")->name('proveedor');
+                Route::post('proveedor', "ProveedorController@guardar");
+                
+               
+                //PRODUCTO
+                Route::get('producto', "ProductoController@producto")->name('producto_1');
+                
+                Route::get('producto/vista_crear_producto', 'ProductoController@vista_crear_producto')->name('vista_crear_producto');
+                Route::get("producto/mostrar", "ProductoController@mostrar")->name("producto");
+                //Guardar
+                Route::post('producto/store_producto', "ProductoController@store_producto")->name('store_producto');
+                
+                //Eliminar
+                Route::delete('producto/delete_producto/{id}', 'ProductoController@delete_producto')->name('delete_producto');
+                //Editar
+                Route::get('producto/edit_producto/{id}', 'ProductoController@edit_producto')->name('edit_producto');
+                Route::patch('producto/edit_p/{id}', 'ProductoController@edit_p')->name('edit_p');
+                
+
+                /////////////////////////MANTENIMIENTOS
+                Route::view('mantenimientos/crear', 'mantenimientos/crear');
+                Route::post('mantenimientos/crear', "MantenimientoController@crear")->name('crear_mantenimiento');
+                //ESTADO
+                Route::get('mantenimientos/estado_mantenimiento_vista/{id}', 'MantenimientoController@estado_mantenimiento_vista')->name('estado_mantenimiento_vista');
+                Route::patch('mantenimientos/cambiar_estado_mantenimiento/{id}', 'MantenimientoController@cambiar_estado_mantenimiento')->name('cambiar_estado_mantenimiento');
+                
+                ///////GUIAS DE REMISION
+                Route::get('guias/find_venta_guia/{id}', 'GuiasController@find_venta_guia')->name('find_venta_guia');
+                Route::get('guias', "GuiasController@guias")->name('guias');
+                Route::get('guias/buscar_pdf/{id}', 'GuiasController@buscar_pdf')->name('buscar_pdf');
+                
+                ///////////////////SERIE
+                Route::get('serie', "SerieController@serie")->name('serie');
+                Route::get('serie/vista_registra_serie/{id}', 'SerieController@vista_registrar_serie')->name('registrar_serie');
+                Route::post('serie/crear_serie/{id}', "SerieController@crear_serie")->name('crear_serie');
+                Route::get('serie/listar_serie/{id}', 'SerieController@listar_serie')->name('listar_serie');
+                
+                /////////////////EMPLEADO
+                Route::get('empleados', "EmpleadosController@empleados")->name('empleados');
+                Route::get('empleados/vista_crear_empleado', "EmpleadosController@vista_crear_empleado")->name('vista_crear_empleado');
+                Route::get('empleados/edit_empleado/{id}', 'EmpleadosController@edit_empleado')->name('editar_empleado');
+                Route::patch('empleados/guardar_edit/{id}', 'EmpleadosController@guardar_edit')->name('guardar_empleado');
+                Route::delete('empleados/delete_empleado/{id}', 'EmpleadosController@delete_empleado')->name('delete_empleado');
+                Route::post('empleados/crear_empleado', "EmpleadosController@crear_empleado")->name('crear_empleado');
+                
+
+                //////////////////CATEGORIA
+                Route::get('categoria', "CategoriaController@categoria")->name('categoria');
+                Route::get('categoria/show', "CategoriaController@show")->name('categoria_agregar');
+                Route::get('categoria/edit_categoria/{id}', 'CategoriaController@edit_categoria')->name('editar_categoria');
+                Route::patch('categoria/edit_categ/{id}', 'CategoriaController@edit_categ')->name('guardar_categoria');
+                Route::delete('categoria/delete_categoria/{id}', 'CategoriaController@delete_categoria')->name('delete_categoria');
+                
+
+
+
+                
+                ///////////////VENTAS
+                Route::post('ventas/guardar_venta', "VentasController@guardar_venta")->name('guardar_venta');
+                
+                //////////////COMPRAS
+                Route::post('compras/guardar_compra', "ComprasController@guardar_compra")->name('guardar_compra');
+                Route::get('compras', "ComprasController@compras")->name('comprar');
+                Route::get('compras/findProveedor', "ComprasController@findProveedor");
+
+
+                Route::get('ventas', "VentasController@ventas")->name('venta');
+                Route::get('/ventas/findClient', "VentasController@findClient");
+                Route::get('/ventas/findProducto', "VentasController@findProducto");
+                
+               
+                Route::get('mantenimiento', "MantenimientoController@mantenimiento")->name('mantenimiento');
+                
+
                 Route::get('/pdf','PDFController@PDF')->name('descargarPDF');
                 
                 // Áreas

@@ -42,10 +42,7 @@
                                     <a href="{{route("formularioAgregarArticulo")}}"
                                        class="button is-success">Agregar</a>
                                 </div>
-                                <div class="control">
-                                    <a href="{{route("formularioAgregarArticulo")}}"
-                                       class="button is-info">Imprimir códigos</a>
-                                </div>
+                            
                                 <div class="control">
                                     @verbatim
                                         <transition name="bounce">

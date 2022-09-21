@@ -14,9 +14,23 @@
  *     You should have received a copy of the GNU General Public License
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-
+// crea un nuevo objeto `Date`
+var today = new Date();
+ 
+// `getDate()` devuelve el día del mes (del 1 al 31)
+var day = today.getDate();
+ 
+// `getMonth()` devuelve el mes (de 0 a 11)
+var month = today.getMonth() + 1;
+ 
+// `getFullYear()` devuelve el año completo
+var year = today.getFullYear();
+ 
+// muestra la fecha de hoy en formato `MM/DD/YYYY`
+var fulldate = year+'-'+month+'-'+day;
 
 new Vue({
+    
     el: "#app",
     data: () => ({
         areas: [],
@@ -28,13 +42,13 @@ new Vue({
         },
         articulo: {
             fechaAdquisicion: "",
-            codigo: "",
-            numeroFolioComprobante: "",
+            codigo: "001",
+            numeroFolioComprobante: "123",
             descripcion: "",
             marca: "",
             modelo: "",
             serie: "",
-            estado: "regular",
+            estado: "Nuevo",
             observaciones: "",
             costoAdquisicion: "",
         },
@@ -125,3 +139,6 @@ new Vue({
         }, 500)
     }
 });
+
+
+

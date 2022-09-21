@@ -11,4 +11,16 @@ class PDFController extends Controller
         return $pdf->download('mantenimiento.pdf');
 
     }
+
+    public function download()
+{
+    $data = [
+        'titulo' => 'Styde.net'
+    ];
+
+    $pdf = \PDF::loadView('prueba', $data);
+
+    return $pdf->download('archivo.pdf');
+}
+    
 }

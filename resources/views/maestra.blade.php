@@ -3,6 +3,7 @@
 <html>
 
 <head>
+    @include('partials.error')
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -38,31 +39,60 @@
         </div>
         <div id="menuPrincipal" class="navbar-menu">
             <div class="navbar-start">
-                <a class="navbar-item" href="{{ route("areas") }}">
+                <a class="navbar-item" href="{{ route("categoria") }}">
                     <span class="icon has-text-danger">
                         <i class="fa fa-home"></i>
-                    </span>&nbsp;Áreas
+                    </span>&nbsp;Categorías
                 </a>
-                <a class="navbar-item" href="{{ route("responsables") }}">
+                <a class="navbar-item" href="{{ route("empleados") }}">
                     <span class="icon has-text-success">
                         <i class="fa fa-users"></i>
                     </span>&nbsp;Empleados
                 </a>
-                <a class="navbar-item" href="{{ route("articulos") }}">
+                <a class="navbar-item" href="{{route('producto_1')}}">
                     <span class="icon has-text-info">
                         <i class="fa fa-box"></i>
                     </span>&nbsp;Inventario
                 </a>
-                <a class="navbar-item" href="{{ route("descargarPDF") }}">
+                <a class="navbar-item" href="{{ route("cliente") }}">
+                    <span class="icon has-text-info">
+                        <i class="fa fa-user"></i>
+                       
+                    </span>&nbsp;Cliente
+                </a>
+                <a class="navbar-item" href="{{ route("proveedor") }}">
+                    <span class="icon has-text-info">
+                        <i class="fa fa-building"></i>
+                       
+                    </span>&nbsp;Proveedor
+                </a>
+                <a class="navbar-item" href="{{ route("venta") }}">
+                    <span class="icon has-text-info">
+                        <i class="fa fa-credit-card"></i>
+                       
+                    </span>&nbsp;Ventas
+                </a>
+                <a class="navbar-item" href="{{ route("comprar") }}">
+                    <span class="icon has-text-info">
+                        <i class="fa fa-shopping-cart"></i>
+                    </span>&nbsp;Compras
+                </a>
+                <a class="navbar-item" href="{{ route("guias") }}">
                     <span class="icon has-text-info">
                         <i class="fa fa-book fa-fw"></i>
                     </span>&nbsp;Guías de remisión
                 </a>
-                <a class="navbar-item" href="#">
+                <a class="navbar-item" href="{{ route("mantenimiento") }}">
                     <span class="icon has-text-info">
                         <i class="fa fa-cog fa-spin"></i>
                     </span>&nbsp;Mantenimientos
                 </a>
+                <a class="navbar-item" href="{{ route("serie") }}">
+                    <span class="icon has-text-info">
+                        <i class="fa fa-cog fa-spin"></i>
+                    </span>&nbsp;Bodega
+                </a>
+                
             </div>
 
             <div class="navbar-end">

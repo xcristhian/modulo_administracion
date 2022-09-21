@@ -118,7 +118,7 @@ new Vue({
             Vue.set(area, "marcada", !area.marcada);
         },
         eliminar(area) {
-            if (!confirm(`¿Eliminar área ${area.nombre}?`)) return;
+            if (!confirm(`¿Eliminar categoría ${area.nombre}?`)) return;
             this.desmarcarTodas();
             let {id} = area;
             Vue.set(area, "eliminando", true);

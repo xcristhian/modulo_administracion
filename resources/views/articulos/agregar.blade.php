@@ -7,27 +7,15 @@
                 <h1 class="is-size-1">Agregar artículo</h1>
                 <div class="field is-horizontal">
                     <div class="field-body">
-                        <div class="field">
-                            <label class="label">Fecha de adquisición</label>
-                            <div class="control">
-                                <input v-model="articulo.fechaAdquisicion" autocomplete="off" class="input" type="date">
-                            </div>
-                        </div>
+                        
                         <div class="field">
                             <label class="label">Código</label>
                             <div class="control">
                                 <input placeholder="Código identificador" v-model="articulo.codigo" autocomplete="off"
-                                       class="input" type="text">
+                                       class="input" type="text" disabled="true">
                             </div>
                         </div>
-                        <div class="field">
-                            <label class="label">Número/folio de comprobante</label>
-                            <div class="control">
-                                <input placeholder="Folio o número" v-model="articulo.numeroFolioComprobante"
-                                       autocomplete="off"
-                                       class="input" type="text">
-                            </div>
-                        </div>
+                      
                     </div>
                 </div>
                 <div class="columns">
@@ -69,21 +57,9 @@
                     <div class="column">
                         <div class="field is-horizontal">
                             <div class="field-body">
+                                
                                 <div class="field">
-                                    <label class="label">Estado</label>
-                                    <div class="control">
-                                        <div class="select is-fullwidth">
-                                            <select v-model="articulo.estado">
-                                                <option value="regular">Regular</option>
-                                                <option value="malo">Malo</option>
-                                                <option value="inservible">Inservible</option>
-                                                <option value="noEncontrado">No encontrado físicamente</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="field">
-                                    <label class="label">Costo de adquisición</label>
+                                    <label class="label">Costo referencial</label>
                                     <div class="control">
                                         <input placeholder="Precio de adquisición" v-model="articulo.costoAdquisicion"
                                                autocomplete="off"
@@ -95,10 +71,10 @@
                         <nav class="panel">
                             <div class="panel-block">
                                 <p class="control">
-                                    <label class="label">Área</label>
+                                    <label class="label">Categoría</label>
                                     <input @focus="mostrar.areas = true" v-model="busqueda"
                                            @keyup="buscarArea()" class="input" type="text"
-                                           placeholder="Buscar área">
+                                           placeholder="Buscar categoría">
                                 </p>
                             </div>
                             @verbatim

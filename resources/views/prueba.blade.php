@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-
+		<script src="/js/jquery2.1.4.min.js"></script>
 		<title>Guía de Remisión -- M2CORP</title>
 
 	
@@ -114,31 +114,37 @@
 			}
 		</style>
 	</head>
-
+   
 	<body>
 		<h1>M2CORP</h1>
-		<h3>RUC: 0909090909</h3> 
-
+		<h3>RUC: 0993303054001</h3> 
+		<h2>GUÍA DE REMISIÓN</h2>
+		@foreach ($datos as $datos)
+		<h3>{{$datos->n_factura_venta}}</h3>
+		@endforeach
 		<div class="invoice-box">
 			<table>
+				
 				<tr>
 					<td colspan="2">
 						<table>
+							
 							<tr>
-								<td class="title">
-									<h2>GUÍA DE REMISIÓN</h2>
-								</td>
-
+								
 								<td>
-									ID #: 123<br />
-									Fecha: 26/08/2022<br />
-									Hora: 08:45:20
+									
+									VENTA #: {{$datos->id_venta}}<br />
+									
+									FECHA Y HORA: {{$DateAndTime}}<br />
+									
+									
 								</td>
+								<td></td>
 							</tr>
 						</table>
 					</td>
 				</tr>
-
+			<h3>DATOS CLIENTE</h3>
 				<tr class="information">
 					<td colspan="2">
 						<table>
@@ -146,31 +152,24 @@
 								<td>
 									Cliente:<br />
 									Ruc:<br />
-									E-mail:
+									E-mail:<br />
+									Dirección:
 								</td>
 
 								<td>
-									CRISTHIAN CHAVEZ<br />
-									0950207647001<br />
-									xcristhian15@gmail.com
+									
+									{{$datos->nombre_c}}<br />
+									{{$datos->ruc_c}}<br />
+									{{$datos->correo_c}}<br />
+									{{$datos->direccion_c}}
 								</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 
-				<tr class="heading">
-					<td>Factura N#</td>
-
-					<td>Autorización</td>
-				</tr>
-
-				<tr class="details">
-					<td>001-001-002022</td>
-
-					<td>156-364-26082022</td>
-				</tr>
-
+				
+<h3>DETALLE</h3>
 				<tr class="heading">
 					<td>Producto</td>
 
@@ -178,29 +177,21 @@
 				</tr>
 
 				<tr class="item">
-					<td>Tarjeta Madre - ASUS</td>
-
-					<td>2</td>
+					
+					<td>{{$datos->nombre_producto}}</td>
+					
+					<td>{{$datos->cantidad_producto}}</td>
 				</tr>
 
-				<tr class="item">
-					<td>Memoria Ram - KINGSTON '8gb c/u'</td>
+				
 
-					<td>2</td>
-				</tr>
-
-				<tr class="item last">
-					<td>Memoria interna SSD - 1TB - HP</td>
-
-					<td>1</td>
-				</tr>
-
-				<tr class="total">
-					<td></td>
-
-					<td>Empleado responsable: Javier Villava</td>
+					
 				</tr>
 			</table>
+
 		</div>
+
+		
 	</body>
 </html>
+

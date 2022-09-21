@@ -8,7 +8,7 @@
                     <div class="columns is-vcentered">
                         <div class="column">
                             @verbatim
-                                <h4 class="is-size-4">Áreas ({{paginacion.total}})</h4>
+                                <h4 class="is-size-4">Categorías ({{paginacion.total}})</h4>
                             @endverbatim
                         </div>
                         <div class="column">
@@ -113,7 +113,7 @@
                                     </span>
                                 </button>
                             </th>
-                            <th>Área</th>
+                            <th>Categoría</th>
                             <th>Editar</th>
                             <th>Eliminar</th>
                         </tr>

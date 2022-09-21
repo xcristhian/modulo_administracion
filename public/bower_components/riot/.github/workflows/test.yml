@@ -1,0 +1,44 @@
+name: test
+
+on:
+  push:
+    branches: [ main, dev ]
+  pull_request:
+    branches: [ dev ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+
+    permissions:
+      checks: write  # for coverallsapp/github-action to create new checks
+      contents: read  # for actions/checkout to fetch code
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [13.x, 14.x, 15.x, 16.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Local Unit Test ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm ci
+      - run: make riot
+      - name: Saucelabs Crossbrowser Testing
+        if: ${{ success() && github.event_name != 'pull_request' && matrix.node-version == '15.x' }}
+        env:
+          SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
+          SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
+        run: make test-sauce
+      - name: Coveralls
+        if: ${{ success() && github.event_name != 'pull_request' && matrix.node-version == '15.x' }}
+        uses: coverallsapp/github-action@master
+        with:
+          path-to-lcov: ./coverage/report-lcov/lcov.info
+          github-token: ${{ secrets.GITHUB_TOKEN }}

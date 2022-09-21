@@ -1,0 +1,142 @@
+
+# if no "v" var given, default to package version
+v ?= $(shell node -pe "require('./package.json').version")
+
+# expand variable (so we can use it on branches w/o package.json)
+VERSION := $(v)
+
+# get x.x.* part of the version number
+MINOR_VERSION = `echo $(VERSION) | sed 's/\.[^.]*$$//'`
+
+# Command line paths
+KARMA = ./node_modules/karma/bin/karma
+ESLINT = ./node_modules/eslint/bin/eslint.js
+MOCHA = ./node_modules/mocha/bin/_mocha
+ROLLUP = ./node_modules/.bin/rollup
+MINIFY = ./node_modules/.bin/terser
+RIOT_CLI = ./node_modules/.bin/riot
+TSC = ./node_modules/.bin/tsc
+
+# folders
+DIST = dist/riot/
+SRC = src
+CONFIG = config/
+
+GENERATED_FILES = riot.js riot+compiler.js
+
+test: eslint test-karma test-typing
+
+test-karma:
+	@ $(KARMA) start test/karma.conf.js
+
+eslint:
+	# check code style
+	@ $(ESLINT) -c ./.eslintrc src test
+
+test-debug:
+	@ ${KARMA} start test/karma.conf.js --browsers=Chrome --no-single-run --auto-watch
+
+test-sauce:
+	# run the riot tests on saucelabs
+	@ SAUCELABS=1 make test-karma
+
+test-typing:
+	# silent compile typescript
+	@ $(TSC) -p ./test
+
+raw:
+	# build riot
+	@ mkdir -p $(DIST)
+	# Default builds UMD
+	@ $(ROLLUP) src/riot.js --format umd --config rollup.config.js --file $(DIST)riot.js
+	@ HAS_VISUALIZER=1 $(ROLLUP) src/riot+compiler.js --format umd --config rollup.config.js --file $(DIST)riot+compiler.js
+	@ IGNORE_DEPENDENCIES=1 \
+	    $(ROLLUP) src/riot.js \
+	    --format esm \
+	    --preserveModules \
+	    --entryFileNames [name].js \
+	    --preserveModulesRoot src \
+	    --config rollup.config.js \
+	    --dir $(DIST)esm
+
+clean:
+	# delete old esm folder
+	@ rm -rf esm
+	# clean $(DIST)
+	@ rm -rf $(DIST)
+
+riot: clean raw test
+
+min:
+	# minify riot
+	@ $(MINIFY) $(DIST)riot.js \
+			--comments false \
+			--toplevel \
+			--compress pure_funcs=['panic'],unsafe=true,unsafe_symbols=true,passes=5 \
+			--mangle \
+			-o $(DIST)riot.min.js;
+	# minify the riot+compiler
+	@ $(MINIFY) $(DIST)riot+compiler.js \
+	        --comments false \
+	        --toplevel \
+			--compress pure_funcs=['panic'],unsafe=true,unsafe_symbols=true,passes=5 \
+			--mangle \
+			-o $(DIST)riot+compiler.min.js;
+
+build:
+	# generate riot.js & riot.min.js
+	@ make min
+	@ cp -r dist/riot/* .
+	# write version in riot.js
+	@ sed -i '' 's/WIP/v$(VERSION)/g' riot*.js
+
+
+bump:
+	# grab all latest changes to main
+	# (if there's any uncommited changes, it will stop here)
+	# bump version in *.json files
+	@ sed -i '' 's/\("version": "\)[^"]*/\1'$(VERSION)'/' package.json
+	# update the lock file as well
+	@ npm i
+	@ make build
+	@ git status --short
+
+bump-undo:
+	# remove all uncommited changes
+	@ git reset --hard
+
+
+version:
+	# @ git checkout main
+	# create version commit
+	@ git status --short
+	@ git add --all
+	@ git commit -am "$(VERSION)"
+	@ git log --oneline -2
+	# create version tag
+	@ git tag -a 'v'$(VERSION) -m $(VERSION)
+	@ git describe
+
+version-undo:
+	# remove the version tag
+	@ git tag -d 'v'$(VERSION)
+	@ git describe
+	# remove the version commit
+	@ git reset `git rev-parse :/$(VERSION)`
+	@ git reset HEAD^
+	@ git log --oneline -2
+
+release: riot min bump version
+
+release-undo:
+	make version-undo
+	make bump-undo
+
+publish:
+	# push new version to npm and github
+	# (github tag will also trigger an update in bower, component, cdnjs, etc)
+	@ npm publish
+	@ git push origin main
+	@ git push origin main --tags
+
+.PHONY: test min eslint test-sauce raw riot build bump bump-undo version version-undo release-undo publish

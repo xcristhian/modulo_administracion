@@ -1,0 +1,17 @@
+{
+  "name": "bower",
+  "homepage": "https://github.com/xcristhian/modulo_administracion",
+  "authors": [
+    "xcristhian <xcristhian15@hotmail.com>"
+  ],
+  "description": "descripcion",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

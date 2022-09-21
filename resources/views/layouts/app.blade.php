@@ -4,6 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <!-- Variable -->
+    <script>
+        function baseUrl(url){
+            return '{{url('')}}/'+url;
+        }
+    </script>
+
+
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -11,6 +19,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -18,6 +27,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
 </head>
 <body>
     <div id="app">
@@ -76,5 +86,12 @@
             @yield('content')
         </main>
     </div>
+  <!-- Scripts -->
+  
+
+  <script src="/js/jquery.easy-autocomplete.min.js"></script>
+  <script src="/js/jquery2.1.4.min.js"></script>
+
+
 </body>
 </html>
