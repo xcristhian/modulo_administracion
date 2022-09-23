@@ -4,7 +4,17 @@
 <div class="container" id="app">
     <div class="columns">
         <div class="column">
-          
+            @if(session('categoriaEliminada'))
+            <div class="alert alert-success">
+                {{ session('categoriaEliminada')}}
+            </div>
+            @endif
+
+            @if(session('categoriaNoEliminada'))
+            <div class="alert alert-success">
+                {{ session('categoriaNoEliminada')}}
+            </div>
+            @endif
             <h1 class="is-size-1">Categorias:</h1>
             
             <hr>
@@ -14,7 +24,7 @@
                     <table class="table is-bordered is-striped is-hoverable is-fullwidth">
                         <thead>
                         <tr>
-                            <th>#</th>
+                            <th>Identificador</th>
                             <th>Nombre de categoria</th>
                             <th>Fecha de creación</th>
                             <th>Acciones</th>
@@ -24,7 +34,7 @@
                             @foreach ($categoria as $categoria)
                       
                             <tr>
-                                <td>{{$contador = $contador + 1}}</td>
+                                <td>{{$categoria->id_categoria}}</td>
                                 <td>{{$categoria->nombre_categoria}}</td>
                                 <td>{{$categoria->created_at}}</td>
                                 <td>
@@ -58,4 +68,6 @@
     </div>
     
 </div>
+
+
 @endsection

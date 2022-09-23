@@ -54,25 +54,25 @@
                         <i class="fa fa-box"></i>
                     </span>&nbsp;Inventario
                 </a>
-                <a class="navbar-item" href="{{ route("cliente") }}">
+                <a class="navbar-item" href="{{ route("vista_mostrar_cliente") }}">
                     <span class="icon has-text-info">
                         <i class="fa fa-user"></i>
                        
                     </span>&nbsp;Cliente
                 </a>
-                <a class="navbar-item" href="{{ route("proveedor") }}">
+                <a class="navbar-item" href="{{ route("vista_mostrar_proveedor") }}">
                     <span class="icon has-text-info">
                         <i class="fa fa-building"></i>
                        
                     </span>&nbsp;Proveedor
                 </a>
-                <a class="navbar-item" href="{{ route("venta") }}">
+                <a class="navbar-item" href="{{ route("vista_mostrar_venta") }}">
                     <span class="icon has-text-info">
                         <i class="fa fa-credit-card"></i>
                        
                     </span>&nbsp;Ventas
                 </a>
-                <a class="navbar-item" href="{{ route("comprar") }}">
+                <a class="navbar-item" href="{{ route("vista_mostrar_compra") }}">
                     <span class="icon has-text-info">
                         <i class="fa fa-shopping-cart"></i>
                     </span>&nbsp;Compras

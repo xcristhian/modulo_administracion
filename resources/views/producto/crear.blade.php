@@ -38,8 +38,11 @@
                         <div class="field">
                             <label class="label">Categoria</label>
                             <div class="control">
-                                <input placeholder="Categoría del producto" name="categoria_producto" required
-                                       class="input" type="text">
+                                <select class="input" name="mostrar_categoria" id="mostrar_categoria">
+                                    @foreach ($categoria as $categoria)
+                                        <option value="{{$categoria->id_categoria}}">{{$categoria->nombre_categoria}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                         <div class="field">

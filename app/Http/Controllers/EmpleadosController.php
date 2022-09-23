@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Empleados;
+use Illuminate\Support\Facades\DB;
 class EmpleadosController extends Controller
 {
     public function empleados(){
@@ -19,10 +20,23 @@ class EmpleadosController extends Controller
 
     public function delete_empleado($id){
         
+        $sql = 'SELECT COUNT(*) as "cuenta" FROM mantenimientos m where m.empleado_asignado ='.$id;
+        $temp = DB::select($sql);
+
+        $cuenta = $temp;
+        foreach($cuenta as $cuenta){
+        $cuenta_total = intval($cuenta->cuenta);
+        }
+
+        if ($cuenta_total == 0) {
+            Empleados::where('id_empleados','like','%'.$id.'%')->delete();
+            return back()->with('empleadoEliminado', 'Empleado eliminado');
+        } elseif ($cuenta_total > 0) {
+            return back()->with('empleadoNoEliminada', 'Error - No se puede eliminar el empleado por el motivo de estar relacionada con mantenimientos existentes');
+        }
+       /* Empleados::where('id_empleados','like','%'.$id.'%')->delete();
  
-        Empleados::where('id_empleados','like','%'.$id.'%')->delete();
- 
-         return back()->with('empleadoEliminado', 'Empleado eliminado');
+         return back()->with('empleadoEliminado', 'Empleado eliminado');*/
      }
 
      public function crear_empleado(Request $request){
@@ -51,4 +65,6 @@ class EmpleadosController extends Controller
         return back()->with('empleadoModificado','Empleado modificada');
 
     }
+
+    
 }

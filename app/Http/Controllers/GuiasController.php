@@ -32,10 +32,20 @@ class GuiasController extends Controller
     $sql = 'SELECT v.id_venta, v.n_factura_venta, c.nombre_c, c.ruc_c, c.correo_c, c.direccion_c, p.nombre_producto, d.cantidad_producto 
     FROM ventas v LEFT JOIN clientes c ON c.id_cliente = v.id_cliente LEFT JOIN detalle_venta d ON d.id_venta=v.id_venta 
     LEFT JOIN producto p ON p.id_producto=d.id_producto WHERE v.id_venta ='.$id;
-
     $datos = DB::select($sql);
 
-    $pdf = \PDF::loadview('prueba', compact('datos', 'DateAndTime'));
+    $sql_contar = 'SELECT COUNT(*) as "cuenta" FROM ventas v LEFT JOIN detalle_venta d ON v.id_venta = d.id_venta WHERE v.id_venta =' .$id;
+    $datos_contar = DB::select($sql_contar);
+    
+    foreach($datos_contar as $datos_contar){
+        $cuenta_producto = intval($datos_contar->cuenta);
+        }
+
+    $sql_productor = 'SELECT v.id_venta, p.nombre_producto, d.cantidad_producto FROM ventas v LEFT JOIN clientes c ON c.id_cliente = v.id_cliente LEFT JOIN detalle_venta d ON d.id_venta=v.id_venta LEFT JOIN producto p ON p.id_producto=d.id_producto WHERE v.id_venta =' .$id;
+    $datos_productos = DB::select($sql_productor);
+        
+
+    $pdf = \PDF::loadview('prueba', compact('datos', 'DateAndTime', 'cuenta_producto', 'datos_productos'));
     return $pdf->download('prueba.pdf');
    
 

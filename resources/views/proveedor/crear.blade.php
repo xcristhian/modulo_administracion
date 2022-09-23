@@ -30,7 +30,7 @@
                             <div class="panel-block">
                                 <p class="control">
                                     <label class="label">Ruc</label>
-                                    <input   class="input" type="text" name="ruc_p" required
+                                    <input   class="input" type="text" name="ruc_p" required maxlength="13"
                                            placeholder= "#RUC o #CÉDULA">
                                 </p>
                             </div>
@@ -54,7 +54,7 @@
                                         <div class="panel-block">
                                             <p class="control">
                                                 <label class="label">Teléfono:</label>
-                                                <input   class="input" type="text" name="telefono_p" required
+                                                <input   class="input" type="text" name="telefono_p" required maxlength="10"
                                                        placeholder= "Ingresar su número de teléfono">
                                             </p>
                                         </div>
@@ -68,9 +68,13 @@
  
              
                 <button class="button is-success" type="submit">Guardar</button>
+                
             @endverbatim
             <br>
         </form>
+        <a href="{{ route("vista_mostrar_proveedor") }}">
+            <button class="button is-warning" type="button">Atrás</button>
+        </a>
         </div>
     </div>
 </div>

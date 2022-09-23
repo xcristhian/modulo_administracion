@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Proveedor extends Model
 {
+    protected $table = 'proveedors';
+
     public function tituloInvertido(){
         return strrev($this->titulo);
     }

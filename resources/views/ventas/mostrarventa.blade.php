@@ -22,7 +22,7 @@
                         <div class="panel-block">
                             <p class="control">
                                 <label class="label">Nombre</label>
-                                <input   class="input" type="text" readonly value="" id="nombre_c"
+                                <input   class="input" type="text" readonly value="" id="nombre_c" required
                                        placeholder= "Nombre de cliente">
                             </p>
                         </div>
@@ -30,9 +30,9 @@
                             <div class="panel-block">
                                 <p class="control">
                                     <label class="label">Ruc/Cédula</label>
-                                    <input   class="input" type="text" id="ruc_c"
+                                    <input   class="input" type="text" id="ruc_c" required maxlength="13"
                                            placeholder= "#RUC o #CÉDULA">
-                                           <input   class="input" type="text" name="cliente" id="cliente" placeholder= "ID_CLIENTE"  style="visibility:hidden">
+                                           <input   class="input" type="text" name="cliente" id="cliente" placeholder= "ID_CLIENTE"  style="visibility:hidden" required>
                                            
                                 </p>
                             </div>
@@ -41,7 +41,7 @@
                                 <div class="panel-block">
                                     <p class="control">
                                         <label class="label">Factura de venta:</label>
-                                        <input   class="input" type="text" id="n_factura_venta" name="n_factura_venta"
+                                        <input   class="input" type="text" id="n_factura_venta" name="n_factura_venta" required
                                                placeholder= "N# de factura con la que se realizo la venta">
                                     </p>
                                 </div>
@@ -59,11 +59,11 @@
                                             </tr>							
                                             <tr>
                                                 <td><input class="itemRow" type="checkbox"></td>
-                                                <td><input type="text" name="id_producto[]" id="id_producto_1" class="form-control" autocomplete="on"  style="visibility:hidden"></td>			
-                                                <td><input type="text" name="productName[]" id="productName_1" class="form-control" autocomplete="on"></td>			
-                                                <td><input type="number" name="quantity[]" id="quantity_1" class="form-control quantity" autocomplete="on"></td>
-                                                <td><input type="text" name="price[]" id="price_1" class="form-control" value="" autocomplete="on" placeholder="PRECIO"></td>
-                                                <td><input type="number" name="total[]" id="total_1" class="form-control total" autocomplete="on" readonly></td>
+                                                <td><input type="text" name="id_producto[]" id="id_producto_1" class="form-control" autocomplete="on"  style="visibility:hidden" required></td>			
+                                                <td><input type="text" name="productName[]" id="productName_1" class="form-control" autocomplete="on" required></td>			
+                                                <td><input type="number" name="quantity[]" id="quantity_1" class="form-control quantity" autocomplete="on" required></td>
+                                                <td><input type="text" name="price[]" id="price_1" class="form-control" value="" autocomplete="on" placeholder="PRECIO" required></td>
+                                                <td><input type="number" name="total[]" id="total_1" class="form-control total" autocomplete="on" readonly required></td>
                                             </tr>						
                                         </table>
                                     </div>

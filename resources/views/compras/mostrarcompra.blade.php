@@ -22,7 +22,7 @@
                         <div class="panel-block">
                             <p class="control">
                                 <label class="label">Proveedor</label>
-                                <input   class="input" type="text" id="nombre_p" value=""
+                                <input   class="input" type="text" id="nombre_p" readonly required
                                        placeholder= "Nombre proveedor">
                             </p>
                         </div>
@@ -30,16 +30,16 @@
                             <div class="panel-block">
                                 <p class="control">
                                     <label class="label">Ruc</label>
-                                    <input   class="input" type="text" id="ruc_p"
+                                    <input   class="input" type="text" id="ruc_p" required maxlength="13"
                                            placeholder= "RUC">
-                                           <input class="input" type="text" name="proveedor" id="proveedor">
+                                           <input class="input" type="text" name="proveedor" id="proveedor" style="visibility:hidden" required>
                                 </p>
                             </div>
                             <nav class="panel">
                                 <div class="panel-block">
                                     <p class="control">
                                         <label class="label">Factura de compra:</label>
-                                        <input   class="input" type="text" name="n_factura_compra"
+                                        <input   class="input" type="text" name="n_factura_compra" required
                                                placeholder= "N# de factura con la que se realizo la compra">
                                     </p>
                                 </div>
@@ -59,11 +59,11 @@
                                             </tr>							
                                             <tr>
                                                 <td><input class="itemRow" type="checkbox"></td>
-                                                <td><input type="text" name="id_producto[]" id="id_producto_1" class="form-control" autocomplete="on"></td>			
-                                                <td><input type="text" name="productName[]" id="productName_1" class="form-control" autocomplete="on"></td>			
-                                                <td><input type="number" name="quantity[]" id="quantity_1" class="form-control quantity" autocomplete="on"></td>
-                                                <td><input type="text" name="price[]" id="price_1" class="form-control" value="" autocomplete="on" placeholder="PRECIO"></td>
-                                                <td><input type="number" name="total[]" id="total_1" class="form-control total" autocomplete="on"></td>
+                                                <td><input type="text" name="id_producto[]" id="id_producto_1" class="form-control" autocomplete="on" style="visibility:hidden" required></td>			
+                                                <td><input type="text" name="productName[]" id="productName_1" class="form-control" autocomplete="on" required></td>			
+                                                <td><input type="number" name="quantity[]" id="quantity_1" class="form-control quantity" autocomplete="on" required></td>
+                                                <td><input type="text" name="price[]" id="price_1" class="form-control" value="" autocomplete="on" placeholder="PRECIO" required></td>
+                                                <td><input type="number" name="total[]" id="total_1" class="form-control total" autocomplete="on" required></td>
                                             </tr>						
                                         </table>
                                     </div>

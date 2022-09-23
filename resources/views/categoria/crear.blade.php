@@ -16,7 +16,7 @@
                         <div class="panel-block">
                             <p class="control">
                                 <label class="label">Nombre de categoria</label>
-                                <input   class="input" type="text" name="nombre_categoria"
+                                <input   class="input" type="text" name="nombre_categoria" required
                                        placeholder= "Escribir ...">
                             </p>
                         </div>

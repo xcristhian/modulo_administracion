@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProductoRequest;
 use App\Producto;
+use App\Categoria;
+use Illuminate\Support\Facades\DB;
 class ProductoController extends Controller
 {
     public function index(){
@@ -27,7 +29,9 @@ class ProductoController extends Controller
 
     public function vista_crear_producto(){
        
-       return view('producto.crear');
+       $categoria = Categoria::all();
+
+       return view('producto.crear', compact('categoria'));
       
     }
 
@@ -38,7 +42,7 @@ class ProductoController extends Controller
         $producto->nombre_producto = $request->input('nombre_producto');
         $producto->marca_producto = $request->input('marca_producto');
         $producto->modelo_producto = $request->input('modelo_producto');
-        $producto->categoria_producto = $request->input('categoria_producto');
+        $producto->categoria_producto = $request->input('mostrar_categoria');
         $producto->descripcion_producto = $request->input('descripcion_producto');
         $producto->cantidad = $request->input('cantidad');
         $producto->precio_venta = 0;
@@ -53,10 +57,25 @@ class ProductoController extends Controller
     }
     public function delete_producto($id){
        // Producto::destroy($id_producto);
+       $sql = 'SELECT COUNT(*) as "cuenta" FROM detalle_venta v INNER JOIN detalle_compra c where v.id_producto = '.$id.' OR c.id_producto ='.$id;
+       $temp = DB::select($sql);
 
-       Producto::where('id_producto','like','%'.$id.'%')->delete();
+       $cuenta = $temp;
+       foreach($cuenta as $cuenta){
+       $cuenta_total = intval($cuenta->cuenta);
+       }
 
-        return back()->with('usuarioEliminado', 'Producto eliminado');
+       if ($cuenta_total == 0) {
+           Producto::where('id_producto','like','%'.$id.'%')->delete();
+           return back()->with('productoEliminado', 'Producto eliminado');
+       } elseif ($cuenta_total > 0) {
+           return back()->with('productoNoEliminada', 'Error - No se puede eliminar el producto por el motivo de estar relacionada con compra/ventas existentes');
+       }
+
+
+       //Producto::where('id_producto','like','%'.$id.'%')->delete();
+
+       // return back()->with('usuarioEliminado', 'Producto eliminado');
     }
 
     public function edit_producto($id){
@@ -70,6 +89,8 @@ class ProductoController extends Controller
         return back()->with('productoModificado','Producto modificado');
 
     }
+
+
 
 
 }

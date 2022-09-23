@@ -5,7 +5,7 @@
     <div class="columns">
         <div class="column">
             <hr>
-            <a href="mantenimientos/crear">            
+            <a href="{{route ('vista_crear_mantenimiento')}}">            
                 <button class="button is-success">Agregar mantenimiento</button>
                 </a>
                 <hr>

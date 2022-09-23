@@ -170,23 +170,28 @@
 
 				
 <h3>DETALLE</h3>
+
 				<tr class="heading">
 					<td>Producto</td>
 
 					<td>Cantidad</td>
 				</tr>
 
+				@for ($i = 0; $i < $cuenta_producto; $i++)
 				<tr class="item">
-					
-					<td>{{$datos->nombre_producto}}</td>
-					
-					<td>{{$datos->cantidad_producto}}</td>
+					<td>{{$datos_productos[$i]->nombre_producto}}</td>
+			
+					<td>{{$datos_productos[$i]->cantidad_producto}}</td>
 				</tr>
+				@endfor
+
+
+				
 
 				
 
 					
-				</tr>
+				
 			</table>
 
 		</div>

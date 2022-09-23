@@ -36,7 +36,7 @@
                         <div class="field">
                             <label class="label">Cédula</label>
                             <div class="control">
-                                <input name="cedula_empleado" placeholder="Ingresar cédula"
+                                <input name="cedula_empleado" placeholder="Ingresar cédula" maxlength="13"
                                        class="input" type="text">
                             </div>
                         </div>

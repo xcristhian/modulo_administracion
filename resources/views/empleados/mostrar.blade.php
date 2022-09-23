@@ -9,6 +9,11 @@
                 {{ session('empleadoEliminado')}}
             </div>
             @endif
+            @if(session('empleadoNoEliminada'))
+            <div class="alert alert-success">
+                {{ session('empleadoNoEliminada')}}
+            </div>
+            @endif
             <h1 class="is-size-1">Empleados:</h1>
             
             <hr>

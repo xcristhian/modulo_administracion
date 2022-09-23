@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\CategoriaRequest;
 use App\Categoria;
+use Illuminate\Support\Facades\DB;
 
 class CategoriaController extends Controller
 {
@@ -31,10 +32,27 @@ class CategoriaController extends Controller
 
     public function delete_categoria($id){
         
+        $sql = 'SELECT COUNT(*) as "cuenta" FROM producto p where p.categoria_producto ='.$id;
+        $temp = DB::select($sql);
+
+        $cuenta = $temp;
+        foreach($cuenta as $cuenta){
+        $cuenta_total = intval($cuenta->cuenta);
+        }
+       
+
+        
+        if ($cuenta_total == 0) {
+            Categoria::where('id_categoria','like','%'.$id.'%')->delete();
+            return back()->with('categoriaEliminada', 'Categoria eliminado');
+        } elseif ($cuenta_total > 0) {
+            return back()->with('categoriaNoEliminada', 'Error - No se puede eliminar la categoria por el motivo de estar relacionada con productos existentes');
+        }
+
+/*
+        
  
-        Categoria::where('id_categoria','like','%'.$id.'%')->delete();
- 
-         return back()->with('categoriaEliminada', 'Categoria eliminado');
+         return back()->with('categoriaEliminada', 'Categoria eliminado');*/
      }
 
     public function edit_categoria($id){
@@ -48,4 +66,9 @@ class CategoriaController extends Controller
         return back()->with('categoriaModificada','Categoria Modificada');
 
     }
+
+    public function consultar_categoria(Request $req){
+        return 'AAAAAAAAAAAAAAAAAAAAAAAAAAAA';
+    }
+
 }

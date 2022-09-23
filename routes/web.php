@@ -41,12 +41,23 @@ Route::group(
                 
              //
                 Route::view("bienvenido/", "bienvenido")->name("bienvenido");
-                Route::get('cliente', "ClienteController@cliente")->name('cliente');
+
+
+                //CLIENTE
+                Route::get('vista_mostrar_cliente', "ClienteController@vista_mostrar_cliente")->name('vista_mostrar_cliente');
+                Route::get('vista_crear_cliente', "ClienteController@vista_crear_cliente")->name('vista_crear_cliente');
+                Route::get('cliente/edit_cliente/{id}', 'ClienteController@edit_cliente')->name('edit_cliente');
+                Route::patch('cliente/editar_cliente/{id}', 'ClienteController@editar_cliente')->name('editar_cliente');
                 Route::post('cliente', "ClienteController@guardar");
 
                 //PROVEEDOR
                 Route::get('proveedor', "ProveedorController@proveedor")->name('proveedor');
                 Route::post('proveedor', "ProveedorController@guardar");
+                Route::get('vista_mostrar_proveedor', "ProveedorController@vista_mostrar_proveedor")->name('vista_mostrar_proveedor');
+                Route::get('vista_crear_proveedor', "ProveedorController@vista_crear_proveedor")->name('vista_crear_proveedor');
+                Route::get('proveedor/edit_proveedor/{id}', 'ProveedorController@edit_proveedor')->name('edit_proveedor');
+                Route::patch('proveedor/editar_proveedor/{id}', 'ProveedorController@editar_proveedor')->name('editar_proveedor');
+                
                 
                
                 //PRODUCTO
@@ -65,7 +76,8 @@ Route::group(
                 
 
                 /////////////////////////MANTENIMIENTOS
-                Route::view('mantenimientos/crear', 'mantenimientos/crear');
+                Route::get('mantenimiento', "MantenimientoController@mantenimiento")->name('mantenimiento');
+                Route::get('mantenimientos/vista_crear_mantenimiento', 'MantenimientoController@vista_crear_mantenimiento')->name('vista_crear_mantenimiento');
                 Route::post('mantenimientos/crear', "MantenimientoController@crear")->name('crear_mantenimiento');
                 //ESTADO
                 Route::get('mantenimientos/estado_mantenimiento_vista/{id}', 'MantenimientoController@estado_mantenimiento_vista')->name('estado_mantenimiento_vista');
@@ -97,26 +109,38 @@ Route::group(
                 Route::get('categoria/edit_categoria/{id}', 'CategoriaController@edit_categoria')->name('editar_categoria');
                 Route::patch('categoria/edit_categ/{id}', 'CategoriaController@edit_categ')->name('guardar_categoria');
                 Route::delete('categoria/delete_categoria/{id}', 'CategoriaController@delete_categoria')->name('delete_categoria');
-                
+            
+                Route::get('/categoria/consultar_clave', "CategoriaController@consultar_categoria");
 
 
-
-                
                 ///////////////VENTAS
                 Route::post('ventas/guardar_venta', "VentasController@guardar_venta")->name('guardar_venta');
+                Route::get('vista_mostrar_venta', "VentasController@vista_mostrar_venta")->name('vista_mostrar_venta');
+                Route::get('vista_agregar_venta', "VentasController@vista_agregar_venta")->name('vista_agregar_venta');
+                
+                Route::get('ventas', "VentasController@ventas")->name('venta');
+                Route::get('/ventas/findClient', "VentasController@findClient");
+                Route::get('/ventas/findProducto', "VentasController@findProducto");
+                //////////////DETALLE VENTA
+                Route::get('vista_detalle_venta/{id}', "VentasController@vista_detalle_venta")->name('vista_detalle_venta');
+                
                 
                 //////////////COMPRAS
                 Route::post('compras/guardar_compra', "ComprasController@guardar_compra")->name('guardar_compra');
                 Route::get('compras', "ComprasController@compras")->name('comprar');
+                Route::get('vista_mostrar_compra', "ComprasController@vista_mostrar_compra")->name('vista_mostrar_compra');
+                Route::get('vista_agregar_compra', "ComprasController@vista_agregar_compra")->name('vista_agregar_compra');
+                
                 Route::get('compras/findProveedor', "ComprasController@findProveedor");
 
+                //////////////DETALLE COMPRA
+                Route::get('vista_detalle_compra/{id}', "ComprasController@vista_detalle_compra")->name('vista_detalle_compra');
+                
 
-                Route::get('ventas', "VentasController@ventas")->name('venta');
-                Route::get('/ventas/findClient', "VentasController@findClient");
-                Route::get('/ventas/findProducto', "VentasController@findProducto");
+
+
                 
                
-                Route::get('mantenimiento', "MantenimientoController@mantenimiento")->name('mantenimiento');
                 
 
                 Route::get('/pdf','PDFController@PDF')->name('descargarPDF');
@@ -178,7 +202,7 @@ Route::group(
         Route::get("logout", function () {
             Auth::logout();
             # Intentar redireccionar a una protegida, que a su vez redirecciona al login :)
-            return redirect()->route("articulos");
+            return redirect()->route("producto_1");
         })->name("logout");
     });
 

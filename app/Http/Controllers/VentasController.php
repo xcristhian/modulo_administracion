@@ -19,6 +19,25 @@ class VentasController extends Controller
         return view('ventas.mostrarventa');
     }
 
+    public function vista_mostrar_venta(){
+        $sql = 'SELECT v.id_venta, c.nombre_c, v.n_factura_venta, v.subtotal, v.iva, v.total, v.cantidad_pagada, v.total_debido FROM ventas v LEFT JOIN clientes c ON v.id_cliente = c.id_cliente ORDER BY v.id_venta';
+        $venta = DB::select($sql);
+        return view('ventas.venta', compact('venta'));
+    }
+
+    public function vista_agregar_venta(){
+        return view('ventas.mostrarventa');
+    }
+//
+    public function vista_detalle_venta($id){
+        $contador=0;
+        $sql = 'SELECT v.id_venta, p.nombre_producto, d.cantidad_producto, d.precio_producto, d.total_compra FROM ventas v LEFT JOIN detalle_venta d ON v.id_venta = d.id_venta LEFT JOIN producto p ON p.id_producto = d.id_producto where v.id_venta='.$id.' ORDER BY v.id_venta';
+        $detalle = DB::select($sql);
+        return view('ventas.detalle', compact('contador','detalle'));
+    }
+
+    
+
     public function guardar_venta(Request $request){
 
       

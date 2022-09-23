@@ -25,11 +25,11 @@
 		
 		htmlRows += '<tr>';
 		htmlRows += '<td><input class="itemRow" type="checkbox"></td>';  
-		htmlRows += '<td><input type="text" name="id_producto[]" id="id_producto_'+count+'" class="form-control" autocomplete="off" style="visibility:hidden"></td>';	        
-		htmlRows += '<td><input type="text" name="productName[]" id="productName_'+count+'" class="form-control" autocomplete="off"></td>';	
-		htmlRows += '<td><input type="number" name="quantity[]" id="quantity_'+count+'" class="form-control quantity" autocomplete="off"></td>';   		
-		htmlRows += '<td><input type="number" name="price[]" id="price_'+count+'" class="form-control price" autocomplete="off"></td>';		 
-		htmlRows += '<td><input type="number" name="total[]" id="total_'+count+'" class="form-control total" autocomplete="off" readonly></td>';          
+		htmlRows += '<td><input type="text" name="id_producto[]" id="id_producto_'+count+'" class="form-control" autocomplete="off" style="visibility:hidden" required></td>';	        
+		htmlRows += '<td><input type="text" name="productName[]" id="productName_'+count+'" class="form-control" autocomplete="off" required></td>';	
+		htmlRows += '<td><input type="number" name="quantity[]" id="quantity_'+count+'" class="form-control quantity" autocomplete="off" required></td>';   		
+		htmlRows += '<td><input type="number" name="price[]" id="price_'+count+'" class="form-control price" autocomplete="off" required></td>';		 
+		htmlRows += '<td><input type="number" name="total[]" id="total_'+count+'" class="form-control total" autocomplete="off" readonly required></td>';          
 		htmlRows += '</tr>';
 		
 		//

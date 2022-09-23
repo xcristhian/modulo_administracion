@@ -10,8 +10,20 @@ class ClienteController extends Controller
     public function cliente(){
      
             $cliente = Cliente::all();
-            return view('cliente.mostrarcliente', ['cliente'=> $cliente]);
+            return view('cliente.mostrarcliente');
     }
+
+    public function vista_mostrar_cliente(){
+        $contador = 0;
+        $cliente = Cliente::all();
+        return view('cliente.cliente', compact('cliente', 'contador'));
+    }
+
+    public function vista_crear_cliente(){
+        return view('cliente.crear');
+    }
+
+
     public function guardar(Request $request){
        
 
@@ -24,8 +36,17 @@ class ClienteController extends Controller
         $articulo->save();
 
         return back()->with('cliente_registrado','Cliente registrado');
-        
-        
+    }
+
+    public function edit_cliente($id){
+        $cliente = Cliente::all()->where('id_cliente', $id);
+        return view('cliente.editar', compact('cliente'));
+    }
+
+    public function editar_cliente(Request $request, $id){
+        $datos_cliente = request()->except((['_token', '_method']));
+        Cliente::where('id_cliente', '=', $id)->update($datos_cliente);
+        return back()->with('clienteModificado','Cliente modificado');
 
     }
 

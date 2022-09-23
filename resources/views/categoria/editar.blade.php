@@ -23,7 +23,7 @@
                         <div class="field">
                             <label class="label">Nombre categoría</label>
                             <div class="control">
-                                <input placeholder="El nombre del producto" name="nombre_categoria"
+                                <input placeholder="El nombre del producto" name="nombre_categoria" required
                                        class="input" type="text" value="{{$categoria->nombre_categoria}}">
                             </div>
                         </div>

@@ -55,5 +55,4 @@
         </a>
     </div>
 </div>
-<script src="{{url("/js/articulos/agregar.js?q=") . time()}}"></script>
 @endsection

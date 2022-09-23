@@ -4,9 +4,20 @@
 <div class="container" id="app">
     <div class="columns">
         <div class="column">
-            <a href="{{route('vista_crear_producto')}}" class="button is-success"> Añadir</a>
+            
+            @if(session('productoEliminado'))
+            <div class="alert alert-success">
+                {{ session('productoEliminado')}}
+            </div>
+            @endif
 
+            @if(session('productoNoEliminada'))
+            <div class="alert alert-success">
+                {{ session('productoNoEliminada')}}
+            </div>
+            @endif
             <h1 class="is-size-1">Producto</h1>
+            <a href="{{route('vista_crear_producto')}}" class="button is-success"> Añadir</a>
             <hr> <hr>
 
 

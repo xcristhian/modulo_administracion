@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Mantenimientos;
+use App\Empleados;
 use App\Http\Requests\MantenimientoRequest;
 use Illuminate\Support\Facades\DB;
 class MantenimientoController extends Controller
@@ -11,7 +12,7 @@ class MantenimientoController extends Controller
     public function mantenimiento(){
         //$mantenimiento = Mantenimientos::all();
         $contador = 0;
-
+        $empleados = Empleados::all();
         $sql = 'SELECT o.id_mantenimientos,o.motivo_ingreso, o.detalle_articulo_mantenimiento, a.nombres_empleado, o.estado_mantenimiento, b.nombre_c, o.created_at FROM mantenimientos o LEFT JOIN empleados a ON o.empleado_asignado = a.id_empleados LEFT JOIN clientes b ON o.cliente_mantenimiento = b.id_cliente';
         $mantenimiento = DB::select($sql);
 
@@ -19,17 +20,19 @@ class MantenimientoController extends Controller
     }
 
     public function vista_crear_mantenimiento(){
-        return view('mantenimientos.crear');
+        $empleados = Empleados::all();
+        return view('mantenimientos.crear', compact('empleados'));
     }
+    
 
     public function crear(Request $request){
 
         $mantenimiento = new Mantenimientos;
         $mantenimiento->motivo_ingreso = $request->input('motivo_ingreso');
         $mantenimiento->detalle_articulo_mantenimiento = $request->input('articulo_mantenimiento');
-        $mantenimiento->empleado_asignado = $request->input('nombre_empleado');
+        $mantenimiento->empleado_asignado = $request->input('mostrar_empleado');
         $mantenimiento->estado_mantenimiento = "ACTIVO";
-        $mantenimiento->cliente_mantenimiento = $request->input('cliente_mantenimiento');
+        $mantenimiento->cliente_mantenimiento = $request->input('id_cliente');
         $mantenimiento->save();
        
         return back()->with('mantenimientoCreado','Mantenimiento creado');
